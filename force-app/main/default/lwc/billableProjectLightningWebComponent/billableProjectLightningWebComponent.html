@@ -24,11 +24,20 @@
                 <label class="slds-form-element__label" for="text-input-id-2">
                     <abbr class="slds-required" title="required">* </abbr>Search Project</label>
                 <div class="slds-form-element__control">
-                    <lightning-input type="text" placeholder={searchKey} value={searchKey} onchange={handelSearchKey}></lightning-input>
+                    <lightning-input type="search" placeholder={placeholder} value={searchKey} onchange={handelSearchKey}></lightning-input>
                     <div style="margin-top:2%;margin-bottom:2%;">
                         <button class="slds-button slds-button_brand" onclick={SearchAccountHandler}>Search</button>
                     </div>
-                    <lightning-datatable key-field="id" data={projects} columns ={cols}></lightning-datatable>    
+                    <template if:true={recordExits}>
+                        <template for:each={projects} for:item="item">
+                            <ul class="slds-has-dividers_top-space" key={i}>
+                                <li class="slds-item">
+                                    <lightning-button onclick={navigateToViewProjectPage} variant="base" value={item.Id} label={item.Name}>{item.Name}</lightning-button>
+                                </li>
+                            </ul>
+                        </template>
+                    </template>
+
                 </div>
             </div>
         </div>
